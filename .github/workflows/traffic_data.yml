@@ -1,40 +1,37 @@
-name: Traffic Data Collection
+name: Extract Traffic Data and Save to GPKG
 
 on:
   schedule:
-    # Run at 2am, 8am, 3pm, 6pm, and 9pm UTC every day
-    - cron: '0 2,8,15,18,21 * * *'
-
+    - cron: "0 5,11,18,21,0 * * *" # Times converted to UTC (5am, 11am, 6pm, 9pm, and midnight GMT-3)
+    
 jobs:
-  collect-traffic-data:
+  extract_traffic_data:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout repository
-        uses: actions/checkout@v3
+      - name: Checkout Repository
+        uses: actions/checkout@v2
 
       - name: Set up Python
-        uses: actions/setup-python@v4
+        uses: actions/setup-python@v2
         with:
           python-version: '3.8'
 
-      - name: Install dependencies
+      - name: Install Dependencies
         run: |
           python -m pip install --upgrade pip
           pip install -r requirements.txt
 
-      - name: Run traffic data script
+      - name: Run Traffic Data Extraction
         env:
-          API_KEY: ${{ secrets.HERE_API_KEY }}  # Store your API key as a GitHub secret
+          API_KEY: ${{ secrets.HERE_API_KEY }}
         run: |
-          python extract_traffic_from_here.py  # Replace with your actual script name
+          python extract_traffic_here.py
 
-      - name: Commit and push changes
+      - name: Commit and Push Results
         run: |
-          git config --global user.name "github-actions[bot]"
-          git config --global user.email "github-actions[bot]@users.noreply.github.com"
+          git config --global user.email "${{ github.actor }}@users.noreply.github.com"
+          git config --global user.name "${{ github.actor }}"
           git add *.gpkg
-          git commit -m "Automated traffic data update - $(date +'%Y-%m-%d %H:%M:%S')"
+          git commit -m "Add new traffic data"
           git push
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}  # GitHub provides this token automatically
