@@ -1,0 +1,5 @@
+requests
+geopandas
+shapely
+sqlalchemy  # If you plan to use PostgreSQL with PostGIS
+psycopg2-binary  # For PostgreSQL connection (optional, only if using PostGIS)
