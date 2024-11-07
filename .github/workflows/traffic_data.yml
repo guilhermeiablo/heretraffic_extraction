@@ -33,17 +33,13 @@ jobs:
         run: |
           python extract_traffic_here.py  # Replace with the actual name of your script
 
-      # Configure Git to push changes back to the repository
-      - name: Configure Git credentials
-        run: |
-          git config --global user.name "github-actions[bot]"
-          git config --global user.email "github-actions[bot]@users.noreply.github.com"
-
       # Commit and push the generated geopackage file to the repository
-      - name: Commit and push geopackage file
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      - name: Commit and Push Results
         run: |
-          git add output.gpkg
-          git commit -m "Add generated geopackage file with traffic data"
+          git config --global user.email "${{ github.actor }}@users.noreply.github.com"
+          git config --global user.name "${{ github.actor }}"
+          git add *.gpkg
+          git commit -m "Add new traffic data"
           git push
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}  # GitHub provides this token automatically
