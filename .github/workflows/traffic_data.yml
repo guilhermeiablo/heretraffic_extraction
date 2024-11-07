@@ -2,7 +2,9 @@ name: Extract Traffic Data and Save to GPKG
 
 on:
   schedule:
-    - cron: "0 5,11,18,21,0 * * *" # Times converted to UTC (5am, 11am, 6pm, 9pm, and midnight GMT-3)
+    - cron: "0 5,11,18,21,0 * * *" # Times converted to UTC
+  workflow_dispatch: # Allows manual triggering
+
     
 jobs:
   extract_traffic_data:
