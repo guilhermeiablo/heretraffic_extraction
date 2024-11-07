@@ -3,7 +3,6 @@ name: Extract Traffic Data
 on:
   schedule:
     - cron: '0 5,11,18,21,0 * * *'  # Schedule for 2am, 8am, 3pm, 6pm, 9pm GMT-3 (which is 5, 11, 18, 21, 0 UTC)
-  workflow_dispatch:
 
 jobs:
   extract_traffic_data:
