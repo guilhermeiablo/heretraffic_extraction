@@ -31,7 +31,7 @@ jobs:
         env:
           HERE_API_KEY: ${{ secrets.HERE_API_KEY }}
         run: |
-          python your_script_name.py  # Replace with the actual name of your script
+          python extract_traffic_here.py  # Replace with the actual name of your script
 
       # Configure Git to push changes back to the repository
       - name: Configure Git credentials
