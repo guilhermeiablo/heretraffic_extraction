@@ -36,8 +36,8 @@ jobs:
       # Commit and push the generated geopackage file to the repository
       - name: Commit and Push Results
         run: |
-          git config --global user.email "${{ github.actor }}@users.noreply.github.com"
-          git config --global user.name "${{ github.actor }}"
+          git config --global user.name "github-actions[bot]"
+          git config --global user.email "github-actions[bot]@users.noreply.github.com"
           git add *.gpkg
           git commit -m "Add new traffic data"
           git push
