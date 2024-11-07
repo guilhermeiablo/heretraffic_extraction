@@ -3,6 +3,7 @@ import requests
 import geopandas as gpd
 from shapely.geometry import LineString
 from datetime import datetime
+import pytz
 
 # Function to get traffic flow data from HERE API
 def get_traffic_flow(bbox, api_key):
@@ -67,7 +68,8 @@ def save_traffic_data_as_geopackage(bbox, output_file):
 bbox = "-47.237,-23.052,-46.815,-22.735"
 
 # Generate a timestamped filename to avoid overwriting
-timestamp = datetime.now().strftime("%Y%m%d_%H%M")
+timezone = pytz.timezone("America/Sao_Paulo")
+timestamp = datetime.now(timezone).strftime("%Y%m%d_%H%M")
 output_file = f"traffic_data_{timestamp}.gpkg"
 
 # Save the traffic data as a GeoPackage file
