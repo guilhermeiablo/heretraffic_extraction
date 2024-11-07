@@ -64,7 +64,7 @@ def save_traffic_data_as_geopackage(bbox, output_file):
         print("Failed to get traffic data.")
 
 # Set your bounding box (min_lng, min_lat, max_lng, max_lat) and output file path
-bbox = "-47.237,-23.052,-46.948,-22.741"
+bbox = "-47.237,-23.052,-46.815,-22.735"
 
 # Generate a timestamped filename to avoid overwriting
 timestamp = datetime.now().strftime("%Y%m%d_%H%M")
